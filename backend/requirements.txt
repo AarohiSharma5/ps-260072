@@ -1,0 +1,11 @@
+numpy>=2.0
+fastapi>=0.115
+uvicorn>=0.32
+xgboost>=2.1
+scikit-learn>=1.5
+pydantic>=2.0
+cdsapi>=0.7
+xarray>=2024.1
+netCDF4>=1.6
+numcodecs>=0.13
+gdown>=5.2
