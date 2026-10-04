@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { TopBar } from "./components/Chrome"
-import { AnalyticsPage } from "./pages/AnalyticsPage"
-import { MapPage } from "./pages/MapPage"
-import { MethodologyPage } from "./pages/MethodologyPage"
+import { MethodPage } from "./pages/MethodPage"
+import { ModelPage } from "./pages/ModelPage"
+import { NowcastPage } from "./pages/NowcastPage"
 import { AppProvider } from "./state"
 
 export function App() {
@@ -12,9 +12,9 @@ export function App() {
         <div className="shell">
           <TopBar />
           <Routes>
-            <Route path="/" element={<MapPage />} />
-            <Route path="/model" element={<AnalyticsPage />} />
-            <Route path="/method" element={<MethodologyPage />} />
+            <Route path="/" element={<NowcastPage />} />
+            <Route path="/model" element={<ModelPage />} />
+            <Route path="/method" element={<MethodPage />} />
           </Routes>
         </div>
       </BrowserRouter>

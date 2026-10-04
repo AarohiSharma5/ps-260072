@@ -1,0 +1,16 @@
+**/.venv
+**/__pycache__
+**/node_modules
+frontend/dist
+backend/data/mosdac_raw
+backend/data/sevir/_raw
+backend/data/sevir_meta
+backend/data/era5_raw
+backend/tools
+backend/logs
+backend/artifacts/*/oof_predictions.csv
+backend/data/mosdac_ctp
+backend/data/mosdac_ctp_india
+.git
+.env
+*.log

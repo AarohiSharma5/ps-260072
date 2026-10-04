@@ -1,0 +1,2258 @@
+{
+  "trained_at": "2026-09-30T14:48:50.187105+00:00",
+  "model_version": "akash-xgb-0.4.0",
+  "data_mode": "SEVIR",
+  "step_min": 5,
+  "leads_min": [
+    15,
+    30,
+    45,
+    60,
+    90
+  ],
+  "hazards": [
+    "thunderstorm",
+    "lightning"
+  ],
+  "disclaimer": "SEVIR MODE. Each case is a United States storm patch from the SEVIR dataset, chosen by the Mumbai-analogue catalog. It is not an observation over Mumbai or India. The radar field is vertically integrated liquid in kg/m\u00b2, coarsened to 8 km. The thunderstorm label is VIL at or above 5 kg/m\u00b2, a proxy, not 40 dBZ. Predictions are a research prototype, not warnings.",
+  "label_definitions": {
+    "thunderstorm": "PROXY: SEVIR vertically integrated liquid at the valid time is at least 5 kg/m\u00b2. This is not a reflectivity threshold and not an observed warning.",
+    "lightning": "Lightning count at the valid time is at least 1.",
+    "status": "Prototype labels. Not an official warning definition."
+  },
+  "threshold_note": "Precision, recall, F1, and the confusion matrix use probability threshold 0.5 for the model and both baselines.",
+  "independence_note": "Test rows are grid cells from held-out cases. Neighboring cells and successive times are correlated, so the row count is not the number of independent storms.",
+  "extrapolation_available": true,
+  "targets": {
+    "thunderstorm_15": {
+      "hazard": "thunderstorm",
+      "lead_min": 15,
+      "n_trees": 200,
+      "support": {
+        "n": 601344,
+        "positives": 155020,
+        "negatives": 446324,
+        "positive_rate": 0.25779
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.76982,
+        "recall": 0.94635,
+        "f1": 0.84901,
+        "roc_auc": 0.98019,
+        "average_precision": 0.95524,
+        "brier": 0.062,
+        "confusion": {
+          "tn": 402459,
+          "fp": 43865,
+          "fn": 8317,
+          "tp": 146703
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.86925,
+        "recall": 0.84832,
+        "f1": 0.85865,
+        "roc_auc": 0.902,
+        "average_precision": 0.7765,
+        "brier": 0.072,
+        "confusion": {
+          "tn": 426543,
+          "fp": 19781,
+          "fn": 23514,
+          "tp": 131506
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.79173,
+        "recall": 0.80018,
+        "f1": 0.79593,
+        "roc_auc": 0.92292,
+        "average_precision": 0.824,
+        "brier": 0.0851,
+        "confusion": {
+          "tn": 413693,
+          "fp": 32631,
+          "fn": 30976,
+          "tp": 124044
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 321704,
+          "mean_predicted": 0.02297,
+          "fraction_positive": 0.00484
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 42337,
+          "mean_predicted": 0.18114,
+          "fraction_positive": 0.03954
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 25548,
+          "mean_predicted": 0.30878,
+          "fraction_positive": 0.08235
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 21187,
+          "mean_predicted": 0.43666,
+          "fraction_positive": 0.14079
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 18837,
+          "mean_predicted": 0.56161,
+          "fraction_positive": 0.22811
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 17740,
+          "mean_predicted": 0.68731,
+          "fraction_positive": 0.35378
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 22440,
+          "mean_predicted": 0.81774,
+          "fraction_positive": 0.55245
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 131551,
+          "mean_predicted": 0.97246,
+          "fraction_positive": 0.94057
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 26933.17383,
+          "gain_share": 0.68239
+        },
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 6234.70654,
+          "gain_share": 0.15797
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 1498.46704,
+          "gain_share": 0.03797
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 1391.03918,
+          "gain_share": 0.03524
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 1284.10327,
+          "gain_share": 0.03253
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 556.25293,
+          "gain_share": 0.01409
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 545.46637,
+          "gain_share": 0.01382
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 458.71152,
+          "gain_share": 0.01162
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 287.96765,
+          "gain_share": 0.0073
+        },
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 200.39134,
+          "gain_share": 0.00508
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 50.72016,
+          "gain_share": 0.00129
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 27.74271,
+          "gain_share": 0.0007
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 0.0,
+          "gain_share": 0.0
+        }
+      ]
+    },
+    "thunderstorm_30": {
+      "hazard": "thunderstorm",
+      "lead_min": 30,
+      "n_trees": 200,
+      "support": {
+        "n": 601344,
+        "positives": 158222,
+        "negatives": 443122,
+        "positive_rate": 0.26311
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.6542,
+        "recall": 0.91468,
+        "f1": 0.76281,
+        "roc_auc": 0.94799,
+        "average_precision": 0.88753,
+        "brier": 0.10341,
+        "confusion": {
+          "tn": 366623,
+          "fp": 76499,
+          "fn": 13500,
+          "tp": 144722
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.78988,
+        "recall": 0.75526,
+        "f1": 0.77218,
+        "roc_auc": 0.84176,
+        "average_precision": 0.66095,
+        "brier": 0.11726,
+        "confusion": {
+          "tn": 411333,
+          "fp": 31789,
+          "fn": 38724,
+          "tp": 119498
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.70555,
+        "recall": 0.72395,
+        "f1": 0.71463,
+        "roc_auc": 0.86156,
+        "average_precision": 0.69888,
+        "brier": 0.1294,
+        "confusion": {
+          "tn": 395319,
+          "fp": 47803,
+          "fn": 43677,
+          "tp": 114545
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 252730,
+          "mean_predicted": 0.05437,
+          "fraction_positive": 0.01121
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 46566,
+          "mean_predicted": 0.17769,
+          "fraction_positive": 0.0352
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 41285,
+          "mean_predicted": 0.31439,
+          "fraction_positive": 0.08163
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 39542,
+          "mean_predicted": 0.43606,
+          "fraction_positive": 0.14311
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 35557,
+          "mean_predicted": 0.56193,
+          "fraction_positive": 0.23182
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 35401,
+          "mean_predicted": 0.68783,
+          "fraction_positive": 0.37572
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 42676,
+          "mean_predicted": 0.81656,
+          "fraction_positive": 0.59193
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 107587,
+          "mean_predicted": 0.95381,
+          "fraction_positive": 0.91012
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 14204.28613,
+          "gain_share": 0.49517
+        },
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 8878.64453,
+          "gain_share": 0.30951
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 1343.49097,
+          "gain_share": 0.04683
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 1319.16882,
+          "gain_share": 0.04599
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 761.60358,
+          "gain_share": 0.02655
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 658.06274,
+          "gain_share": 0.02294
+        },
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 444.3172,
+          "gain_share": 0.01549
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 348.4566,
+          "gain_share": 0.01215
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 343.70801,
+          "gain_share": 0.01198
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 236.84749,
+          "gain_share": 0.00826
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 92.30659,
+          "gain_share": 0.00322
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 38.89648,
+          "gain_share": 0.00136
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 16.12306,
+          "gain_share": 0.00056
+        }
+      ]
+    },
+    "thunderstorm_45": {
+      "hazard": "thunderstorm",
+      "lead_min": 45,
+      "n_trees": 200,
+      "support": {
+        "n": 601344,
+        "positives": 161209,
+        "negatives": 440135,
+        "positive_rate": 0.26808
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.58957,
+        "recall": 0.88555,
+        "f1": 0.70786,
+        "roc_auc": 0.91299,
+        "average_precision": 0.82317,
+        "brier": 0.13241,
+        "confusion": {
+          "tn": 340753,
+          "fp": 99382,
+          "fn": 18451,
+          "tp": 142758
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.73163,
+        "recall": 0.6866,
+        "f1": 0.7084,
+        "roc_auc": 0.79718,
+        "average_precision": 0.58635,
+        "brier": 0.15153,
+        "confusion": {
+          "tn": 399534,
+          "fp": 40601,
+          "fn": 50523,
+          "tp": 110686
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.65197,
+        "recall": 0.67084,
+        "f1": 0.66127,
+        "roc_auc": 0.81855,
+        "average_precision": 0.62499,
+        "brier": 0.1603,
+        "confusion": {
+          "tn": 382404,
+          "fp": 57731,
+          "fn": 53063,
+          "tp": 108146
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 141289,
+          "mean_predicted": 0.07999,
+          "fraction_positive": 0.01839
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 128412,
+          "mean_predicted": 0.17013,
+          "fraction_positive": 0.03854
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 40571,
+          "mean_predicted": 0.31102,
+          "fraction_positive": 0.08538
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 48932,
+          "mean_predicted": 0.44041,
+          "fraction_positive": 0.15203
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 51262,
+          "mean_predicted": 0.5617,
+          "fraction_positive": 0.24433
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 49262,
+          "mean_predicted": 0.68768,
+          "fraction_positive": 0.39674
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 58110,
+          "mean_predicted": 0.81504,
+          "fraction_positive": 0.62041
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 83506,
+          "mean_predicted": 0.94046,
+          "fraction_positive": 0.89379
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 11260.78418,
+          "gain_share": 0.47322
+        },
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 6952.22363,
+          "gain_share": 0.29216
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 1093.19507,
+          "gain_share": 0.04594
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 1049.5863,
+          "gain_share": 0.04411
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 793.88397,
+          "gain_share": 0.03336
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 658.51471,
+          "gain_share": 0.02767
+        },
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 583.18756,
+          "gain_share": 0.02451
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 359.08118,
+          "gain_share": 0.01509
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 354.94437,
+          "gain_share": 0.01492
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 281.76645,
+          "gain_share": 0.01184
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 240.36032,
+          "gain_share": 0.0101
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 117.62224,
+          "gain_share": 0.00494
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 51.17899,
+          "gain_share": 0.00215
+        }
+      ]
+    },
+    "thunderstorm_60": {
+      "hazard": "thunderstorm",
+      "lead_min": 60,
+      "n_trees": 192,
+      "support": {
+        "n": 601344,
+        "positives": 164325,
+        "negatives": 437019,
+        "positive_rate": 0.27326
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.54894,
+        "recall": 0.8536,
+        "f1": 0.66818,
+        "roc_auc": 0.87665,
+        "average_precision": 0.76287,
+        "brier": 0.15657,
+        "confusion": {
+          "tn": 321764,
+          "fp": 115255,
+          "fn": 24057,
+          "tp": 140268
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.68714,
+        "recall": 0.63262,
+        "f1": 0.65875,
+        "roc_auc": 0.76216,
+        "average_precision": 0.53509,
+        "brier": 0.1791,
+        "confusion": {
+          "tn": 389687,
+          "fp": 47332,
+          "fn": 60370,
+          "tp": 103955
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.61431,
+        "recall": 0.62968,
+        "f1": 0.6219,
+        "roc_auc": 0.78506,
+        "average_precision": 0.57323,
+        "brier": 0.18502,
+        "confusion": {
+          "tn": 372056,
+          "fp": 64963,
+          "fn": 60853,
+          "tp": 103472
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 54661,
+          "mean_predicted": 0.10196,
+          "fraction_positive": 0.03119
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 164933,
+          "mean_predicted": 0.18731,
+          "fraction_positive": 0.04678
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 71234,
+          "mean_predicted": 0.30213,
+          "fraction_positive": 0.0817
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 54993,
+          "mean_predicted": 0.4402,
+          "fraction_positive": 0.16031
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 65890,
+          "mean_predicted": 0.56243,
+          "fraction_positive": 0.26307
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 62437,
+          "mean_predicted": 0.68756,
+          "fraction_positive": 0.41802
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 65640,
+          "mean_predicted": 0.813,
+          "fraction_positive": 0.6465
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 61556,
+          "mean_predicted": 0.92817,
+          "fraction_positive": 0.88372
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 9800.71777,
+          "gain_share": 0.47097
+        },
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 5969.60645,
+          "gain_share": 0.28687
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 891.94177,
+          "gain_share": 0.04286
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 865.05157,
+          "gain_share": 0.04157
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 783.25208,
+          "gain_share": 0.03764
+        },
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 667.75995,
+          "gain_share": 0.03209
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 570.24896,
+          "gain_share": 0.0274
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 410.87854,
+          "gain_share": 0.01974
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 313.18198,
+          "gain_share": 0.01505
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 311.04883,
+          "gain_share": 0.01495
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 118.11727,
+          "gain_share": 0.00568
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 56.52721,
+          "gain_share": 0.00272
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 51.3999,
+          "gain_share": 0.00247
+        }
+      ]
+    },
+    "thunderstorm_90": {
+      "hazard": "thunderstorm",
+      "lead_min": 90,
+      "n_trees": 80,
+      "support": {
+        "n": 601344,
+        "positives": 169173,
+        "negatives": 432171,
+        "positive_rate": 0.28132
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.48899,
+        "recall": 0.79027,
+        "f1": 0.60416,
+        "roc_auc": 0.80556,
+        "average_precision": 0.65428,
+        "brier": 0.1944,
+        "confusion": {
+          "tn": 292460,
+          "fp": 139711,
+          "fn": 35480,
+          "tp": 133693
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.61847,
+        "recall": 0.55308,
+        "f1": 0.58395,
+        "roc_auc": 0.70976,
+        "average_precision": 0.46779,
+        "brier": 0.22172,
+        "confusion": {
+          "tn": 374450,
+          "fp": 57721,
+          "fn": 75607,
+          "tp": 93566
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.55835,
+        "recall": 0.56972,
+        "f1": 0.56398,
+        "roc_auc": 0.73366,
+        "average_precision": 0.50225,
+        "brier": 0.22303,
+        "confusion": {
+          "tn": 355934,
+          "fp": 76237,
+          "fn": 72792,
+          "tp": 96381
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 2547,
+          "mean_predicted": 0.11665,
+          "fraction_positive": 0.13271
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 64876,
+          "mean_predicted": 0.20381,
+          "fraction_positive": 0.0749
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 181364,
+          "mean_predicted": 0.30645,
+          "fraction_positive": 0.09731
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 79153,
+          "mean_predicted": 0.43902,
+          "fraction_positive": 0.15963
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 96101,
+          "mean_predicted": 0.56238,
+          "fraction_positive": 0.27697
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 83478,
+          "mean_predicted": 0.68774,
+          "fraction_positive": 0.45626
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 73679,
+          "mean_predicted": 0.81097,
+          "fraction_positive": 0.70008
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 20146,
+          "mean_predicted": 0.90027,
+          "fraction_positive": 0.86404
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 12271.35059,
+          "gain_share": 0.41296
+        },
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 9802.29004,
+          "gain_share": 0.32987
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 1469.03943,
+          "gain_share": 0.04944
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 1102.73315,
+          "gain_share": 0.03711
+        },
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 1078.177,
+          "gain_share": 0.03628
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 1025.58423,
+          "gain_share": 0.03451
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 866.68433,
+          "gain_share": 0.02917
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 727.37061,
+          "gain_share": 0.02448
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 652.68365,
+          "gain_share": 0.02196
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 418.22906,
+          "gain_share": 0.01407
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 249.02444,
+          "gain_share": 0.00838
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 52.44182,
+          "gain_share": 0.00176
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 0.0,
+          "gain_share": 0.0
+        }
+      ]
+    },
+    "lightning_15": {
+      "hazard": "lightning",
+      "lead_min": 15,
+      "n_trees": 54,
+      "support": {
+        "n": 601344,
+        "positives": 19112,
+        "negatives": 582232,
+        "positive_rate": 0.03178
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.24303,
+        "recall": 0.86705,
+        "f1": 0.37965,
+        "roc_auc": 0.92166,
+        "average_precision": 0.54595,
+        "brier": 0.07435,
+        "confusion": {
+          "tn": 530618,
+          "fp": 51614,
+          "fn": 2541,
+          "tp": 16571
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.52199,
+        "recall": 0.51099,
+        "f1": 0.51643,
+        "roc_auc": 0.74781,
+        "average_precision": 0.28227,
+        "brier": 0.03041,
+        "confusion": {
+          "tn": 573289,
+          "fp": 8943,
+          "fn": 9346,
+          "tp": 9766
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.40996,
+        "recall": 0.39394,
+        "f1": 0.40179,
+        "roc_auc": 0.80321,
+        "average_precision": 0.30401,
+        "brier": 0.03037,
+        "confusion": {
+          "tn": 571396,
+          "fp": 10836,
+          "fn": 11583,
+          "tp": 7529
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 342592,
+          "mean_predicted": 0.09428,
+          "fraction_positive": 0.00368
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 189959,
+          "mean_predicted": 0.17172,
+          "fraction_positive": 0.00669
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 597,
+          "mean_predicted": 0.25206,
+          "fraction_positive": 0.01508
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 11,
+          "mean_predicted": 0.48127,
+          "fraction_positive": 0.18182
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 750,
+          "mean_predicted": 0.58472,
+          "fraction_positive": 0.10533
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 16736,
+          "mean_predicted": 0.68578,
+          "fraction_positive": 0.06949
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 23625,
+          "mean_predicted": 0.81667,
+          "fraction_positive": 0.13515
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 27074,
+          "mean_predicted": 0.92609,
+          "fraction_positive": 0.44825
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 62986.19531,
+          "gain_share": 0.76611
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 7034.55713,
+          "gain_share": 0.08556
+        },
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 2843.8457,
+          "gain_share": 0.03459
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 2212.62231,
+          "gain_share": 0.02691
+        },
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 2115.96191,
+          "gain_share": 0.02574
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 1617.51208,
+          "gain_share": 0.01967
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 1102.06616,
+          "gain_share": 0.0134
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 747.24603,
+          "gain_share": 0.00909
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 531.81616,
+          "gain_share": 0.00647
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 430.78146,
+          "gain_share": 0.00524
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 367.0383,
+          "gain_share": 0.00446
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 132.12042,
+          "gain_share": 0.00161
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 93.80645,
+          "gain_share": 0.00114
+        }
+      ]
+    },
+    "lightning_30": {
+      "hazard": "lightning",
+      "lead_min": 30,
+      "n_trees": 58,
+      "support": {
+        "n": 601344,
+        "positives": 19240,
+        "negatives": 582104,
+        "positive_rate": 0.03199
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.20726,
+        "recall": 0.73274,
+        "f1": 0.32312,
+        "roc_auc": 0.85713,
+        "average_precision": 0.33011,
+        "brier": 0.11441,
+        "confusion": {
+          "tn": 528180,
+          "fp": 53924,
+          "fn": 5142,
+          "tp": 14098
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.36752,
+        "recall": 0.35738,
+        "f1": 0.36238,
+        "roc_auc": 0.66853,
+        "average_precision": 0.15191,
+        "brier": 0.04024,
+        "confusion": {
+          "tn": 570271,
+          "fp": 11833,
+          "fn": 12364,
+          "tp": 6876
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.24647,
+        "recall": 0.25369,
+        "f1": 0.25003,
+        "roc_auc": 0.69731,
+        "average_precision": 0.13621,
+        "brier": 0.04119,
+        "confusion": {
+          "tn": 567181,
+          "fp": 14923,
+          "fn": 14359,
+          "tp": 4881
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 15299,
+          "mean_predicted": 0.1163,
+          "fraction_positive": 0.00601
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 323915,
+          "mean_predicted": 0.18672,
+          "fraction_positive": 0.0072
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 179229,
+          "mean_predicted": 0.3016,
+          "fraction_positive": 0.01325
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 14879,
+          "mean_predicted": 0.4053,
+          "fraction_positive": 0.02305
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 937,
+          "mean_predicted": 0.57401,
+          "fraction_positive": 0.08431
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 14046,
+          "mean_predicted": 0.71849,
+          "fraction_positive": 0.08728
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 38181,
+          "mean_predicted": 0.82045,
+          "fraction_positive": 0.16836
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 14858,
+          "mean_predicted": 0.91019,
+          "fraction_positive": 0.42839
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 48703.9375,
+          "gain_share": 0.74521
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 3437.03906,
+          "gain_share": 0.05259
+        },
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 2985.63989,
+          "gain_share": 0.04568
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 2086.20874,
+          "gain_share": 0.03192
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 1861.27625,
+          "gain_share": 0.02848
+        },
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 1618.49829,
+          "gain_share": 0.02476
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 1229.76343,
+          "gain_share": 0.01882
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 1101.83984,
+          "gain_share": 0.01686
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 569.94659,
+          "gain_share": 0.00872
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 550.43268,
+          "gain_share": 0.00842
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 522.71722,
+          "gain_share": 0.008
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 511.81165,
+          "gain_share": 0.00783
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 176.75551,
+          "gain_share": 0.0027
+        }
+      ]
+    },
+    "lightning_45": {
+      "hazard": "lightning",
+      "lead_min": 45,
+      "n_trees": 40,
+      "support": {
+        "n": 601344,
+        "positives": 19117,
+        "negatives": 582227,
+        "positive_rate": 0.03179
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.16557,
+        "recall": 0.60339,
+        "f1": 0.25984,
+        "roc_auc": 0.79373,
+        "average_precision": 0.20202,
+        "brier": 0.14742,
+        "confusion": {
+          "tn": 524093,
+          "fp": 58134,
+          "fn": 7582,
+          "tp": 11535
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.26763,
+        "recall": 0.26191,
+        "f1": 0.26474,
+        "roc_auc": 0.61919,
+        "average_precision": 0.09356,
+        "brier": 0.04625,
+        "confusion": {
+          "tn": 568525,
+          "fp": 13702,
+          "fn": 14110,
+          "tp": 5007
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.16942,
+        "recall": 0.1891,
+        "f1": 0.17872,
+        "roc_auc": 0.63786,
+        "average_precision": 0.08253,
+        "brier": 0.04759,
+        "confusion": {
+          "tn": 564505,
+          "fp": 17722,
+          "fn": 15502,
+          "tp": 3615
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 0,
+          "mean_predicted": null,
+          "fraction_positive": null
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 143990,
+          "mean_predicted": 0.21944,
+          "fraction_positive": 0.01073
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 269426,
+          "mean_predicted": 0.30832,
+          "fraction_positive": 0.01297
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 118259,
+          "mean_predicted": 0.40758,
+          "fraction_positive": 0.0215
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 2872,
+          "mean_predicted": 0.53733,
+          "fraction_positive": 0.05049
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 30637,
+          "mean_predicted": 0.71644,
+          "fraction_positive": 0.11127
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 33901,
+          "mean_predicted": 0.79516,
+          "fraction_positive": 0.20566
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 2259,
+          "mean_predicted": 0.89809,
+          "fraction_positive": 0.44666
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 45785.01953,
+          "gain_share": 0.70352
+        },
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 3692.17456,
+          "gain_share": 0.05673
+        },
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 2690.77075,
+          "gain_share": 0.04135
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 2346.20312,
+          "gain_share": 0.03605
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 2139.22852,
+          "gain_share": 0.03287
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 1776.67834,
+          "gain_share": 0.0273
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 1658.4397,
+          "gain_share": 0.02548
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 1488.77136,
+          "gain_share": 0.02288
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 849.99969,
+          "gain_share": 0.01306
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 758.617,
+          "gain_share": 0.01166
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 721.81989,
+          "gain_share": 0.01109
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 705.86395,
+          "gain_share": 0.01085
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 466.29977,
+          "gain_share": 0.00717
+        }
+      ]
+    },
+    "lightning_60": {
+      "hazard": "lightning",
+      "lead_min": 60,
+      "n_trees": 47,
+      "support": {
+        "n": 601344,
+        "positives": 18852,
+        "negatives": 582492,
+        "positive_rate": 0.03135
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.12822,
+        "recall": 0.4956,
+        "f1": 0.20373,
+        "roc_auc": 0.73547,
+        "average_precision": 0.12997,
+        "brier": 0.16823,
+        "confusion": {
+          "tn": 518968,
+          "fp": 63524,
+          "fn": 9509,
+          "tp": 9343
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.1999,
+        "recall": 0.19839,
+        "f1": 0.19914,
+        "roc_auc": 0.58634,
+        "average_precision": 0.06479,
+        "brier": 0.05002,
+        "confusion": {
+          "tn": 567523,
+          "fp": 14969,
+          "fn": 15112,
+          "tp": 3740
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.12327,
+        "recall": 0.15187,
+        "f1": 0.13608,
+        "roc_auc": 0.60128,
+        "average_precision": 0.05823,
+        "brier": 0.05239,
+        "confusion": {
+          "tn": 562129,
+          "fp": 20363,
+          "fn": 15989,
+          "tp": 2863
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 0,
+          "mean_predicted": null,
+          "fraction_positive": null
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 51229,
+          "mean_predicted": 0.22412,
+          "fraction_positive": 0.01197
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 255084,
+          "mean_predicted": 0.31173,
+          "fraction_positive": 0.01421
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 222164,
+          "mean_predicted": 0.42295,
+          "fraction_positive": 0.02372
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 10165,
+          "mean_predicted": 0.56285,
+          "fraction_positive": 0.0727
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 48932,
+          "mean_predicted": 0.68864,
+          "fraction_positive": 0.11399
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 13057,
+          "mean_predicted": 0.78758,
+          "fraction_positive": 0.21146
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 713,
+          "mean_predicted": 0.90177,
+          "fraction_positive": 0.37167
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 25897.57227,
+          "gain_share": 0.59987
+        },
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 3149.57812,
+          "gain_share": 0.07295
+        },
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 2294.3291,
+          "gain_share": 0.05314
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 2073.67822,
+          "gain_share": 0.04803
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 1873.17395,
+          "gain_share": 0.04339
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 1710.47241,
+          "gain_share": 0.03962
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 1493.83044,
+          "gain_share": 0.0346
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 1286.8739,
+          "gain_share": 0.02981
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 975.35736,
+          "gain_share": 0.02259
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 835.31018,
+          "gain_share": 0.01935
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 758.8418,
+          "gain_share": 0.01758
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 573.3031,
+          "gain_share": 0.01328
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 249.68678,
+          "gain_share": 0.00578
+        }
+      ]
+    },
+    "lightning_90": {
+      "hazard": "lightning",
+      "lead_min": 90,
+      "n_trees": 63,
+      "support": {
+        "n": 601344,
+        "positives": 17848,
+        "negatives": 583496,
+        "positive_rate": 0.02968
+      },
+      "model": {
+        "threshold": 0.5,
+        "precision": 0.07735,
+        "recall": 0.32732,
+        "f1": 0.12513,
+        "roc_auc": 0.649,
+        "average_precision": 0.07098,
+        "brier": 0.17551,
+        "confusion": {
+          "tn": 513812,
+          "fp": 69684,
+          "fn": 12006,
+          "tp": 5842
+        },
+        "roc_auc_defined": true
+      },
+      "persistence": {
+        "threshold": 0.5,
+        "precision": 0.11796,
+        "recall": 0.12366,
+        "f1": 0.12074,
+        "roc_auc": 0.54769,
+        "average_precision": 0.0406,
+        "brier": 0.05345,
+        "confusion": {
+          "tn": 566994,
+          "fp": 16502,
+          "fn": 15641,
+          "tp": 2207
+        },
+        "roc_auc_defined": true
+      },
+      "extrapolation": {
+        "threshold": 0.5,
+        "precision": 0.07396,
+        "recall": 0.10937,
+        "f1": 0.08825,
+        "roc_auc": 0.55746,
+        "average_precision": 0.03847,
+        "brier": 0.0589,
+        "confusion": {
+          "tn": 559056,
+          "fp": 24440,
+          "fn": 15896,
+          "tp": 1952
+        },
+        "roc_auc_defined": true
+      },
+      "reliability": [
+        {
+          "bin_lo": 0.0,
+          "bin_hi": 0.125,
+          "count": 0,
+          "mean_predicted": null,
+          "fraction_positive": null
+        },
+        {
+          "bin_lo": 0.125,
+          "bin_hi": 0.25,
+          "count": 17854,
+          "mean_predicted": 0.21743,
+          "fraction_positive": 0.01344
+        },
+        {
+          "bin_lo": 0.25,
+          "bin_hi": 0.375,
+          "count": 204908,
+          "mean_predicted": 0.32418,
+          "fraction_positive": 0.01793
+        },
+        {
+          "bin_lo": 0.375,
+          "bin_hi": 0.5,
+          "count": 303056,
+          "mean_predicted": 0.42883,
+          "fraction_positive": 0.0267
+        },
+        {
+          "bin_lo": 0.5,
+          "bin_hi": 0.625,
+          "count": 60484,
+          "mean_predicted": 0.54867,
+          "fraction_positive": 0.06512
+        },
+        {
+          "bin_lo": 0.625,
+          "bin_hi": 0.75,
+          "count": 12373,
+          "mean_predicted": 0.67572,
+          "fraction_positive": 0.11024
+        },
+        {
+          "bin_lo": 0.75,
+          "bin_hi": 0.875,
+          "count": 2383,
+          "mean_predicted": 0.79282,
+          "fraction_positive": 0.18506
+        },
+        {
+          "bin_lo": 0.875,
+          "bin_hi": 1.0,
+          "count": 286,
+          "mean_predicted": 0.90201,
+          "fraction_positive": 0.34266
+        }
+      ],
+      "feature_importance": [
+        {
+          "feature": "neighbor_lightning",
+          "label": "Neighborhood lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 5661.61475,
+          "gain_share": 0.31427
+        },
+        {
+          "feature": "vil_grad_mag",
+          "label": "VIL spatial gradient",
+          "unit": "kg/m\u00b2 / km",
+          "group": "radar",
+          "gain": 2157.97559,
+          "gain_share": 0.11979
+        },
+        {
+          "feature": "neighbor_vil_max",
+          "label": "Neighborhood maximum VIL",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 1773.02344,
+          "gain_share": 0.09842
+        },
+        {
+          "feature": "lightning_density",
+          "label": "Lightning density",
+          "unit": "flashes / km\u00b2 / 5 min",
+          "group": "lightning",
+          "gain": 1432.87598,
+          "gain_share": 0.07954
+        },
+        {
+          "feature": "lightning_count",
+          "label": "Lightning count",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 1300.22803,
+          "gain_share": 0.07217
+        },
+        {
+          "feature": "motion_speed",
+          "label": "Storm motion speed",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 1230.84937,
+          "gain_share": 0.06832
+        },
+        {
+          "feature": "motion_v",
+          "label": "Storm motion northward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 1080.05933,
+          "gain_share": 0.05995
+        },
+        {
+          "feature": "vil",
+          "label": "Vertically integrated liquid",
+          "unit": "kg/m\u00b2",
+          "group": "radar",
+          "gain": 749.42767,
+          "gain_share": 0.0416
+        },
+        {
+          "feature": "motion_u",
+          "label": "Storm motion eastward",
+          "unit": "m/s",
+          "group": "motion",
+          "gain": 731.69873,
+          "gain_share": 0.04062
+        },
+        {
+          "feature": "lightning_rate_change",
+          "label": "Lightning-rate change",
+          "unit": "flashes / 5 min",
+          "group": "lightning",
+          "gain": 647.72552,
+          "gain_share": 0.03595
+        },
+        {
+          "feature": "upstream_vil_1",
+          "label": "Upstream VIL (5 min motion)",
+          "unit": "kg/m\u00b2",
+          "group": "motion",
+          "gain": 547.3302,
+          "gain_share": 0.03038
+        },
+        {
+          "feature": "vil_trend_2",
+          "label": "VIL change (10 min)",
+          "unit": "kg/m\u00b2 / 10 min",
+          "group": "radar",
+          "gain": 379.81021,
+          "gain_share": 0.02108
+        },
+        {
+          "feature": "vil_trend_1",
+          "label": "VIL change (5 min)",
+          "unit": "kg/m\u00b2 / 5 min",
+          "group": "radar",
+          "gain": 322.61288,
+          "gain_share": 0.01791
+        }
+      ]
+    }
+  }
+}

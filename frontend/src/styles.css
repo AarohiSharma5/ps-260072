@@ -389,3 +389,81 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto; transition: none !important; }
 }
+
+/* Chennai nowcast page */
+.cn section { margin-top: 36px; }
+.cn h2 { font-family: var(--cond); font-size: 28px; margin: 0 0 6px; }
+.cn-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.cn-card { border: 1px solid var(--line); background: var(--bg-2); padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.cn-card-hot { border-color: var(--cyan); }
+.cn-card-label { color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.cn-card-value { font-family: var(--cond); font-size: 46px; line-height: 1; }
+.cn-card-hot .cn-card-value { color: var(--cyan); }
+.cn-card-note { color: var(--faint); font-size: 12px; }
+.cn-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: baseline; }
+.cn-dot-band { background: var(--danger); opacity: 0.35; border-radius: 2px; }
+.cn-baseline th, .cn-baseline td { color: var(--muted); font-style: italic; }
+.cn-pick { display: inline-flex; align-items: center; gap: 10px; margin: 8px 0 14px; }
+.cn-pick span { color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.cn-pick select { background: var(--bg-2); color: var(--text); border: 1px solid var(--line-strong); padding: 6px 10px; font: inherit; }
+.cn-chart { width: 100%; }
+.cn-chart svg { width: 100%; height: auto; display: block; background: var(--bg-2); border: 1px solid var(--line); }
+.cn-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.cn-grid { stroke: var(--line); stroke-width: 1; }
+.cn-thresh { stroke: var(--cyan); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.6; }
+.cn-axis { fill: var(--faint); font-size: 11px; font-family: var(--sans); }
+.cn-panel { fill: var(--muted); font-size: 12px; font-family: var(--sans); }
+.cn-band { fill: var(--danger); opacity: 0.16; }
+.cn-report { stroke: var(--danger); stroke-width: 2; }
+.cn-cursor { stroke: var(--text); stroke-width: 1; opacity: 0.45; }
+.cn-tip { fill: var(--paper-solid); stroke: var(--line-strong); }
+.cn-tip-head { fill: var(--text); font-size: 12px; font-weight: 600; font-family: var(--sans); }
+.cn-tip-text { fill: var(--muted); font-size: 11px; font-family: var(--sans); }
+.cn-legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 10px 0; color: var(--muted); font-size: 13px; }
+.cn-reports { margin-top: 8px; color: var(--muted); font-size: 13px; }
+.cn-reports ul { list-style: none; padding: 0; max-height: 220px; overflow: auto; }
+.cn-reports li { padding: 3px 0; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 11px; }
+.cn-notes { padding-left: 18px; color: var(--muted); }
+.cn-notes li { margin: 6px 0; }
+.cn-code { background: var(--bg-2); border: 1px solid var(--line); padding: 12px 14px; font-family: var(--mono); font-size: 12px; }
+@media (max-width: 1100px) { .cn-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) {
+  .cn-cards { grid-template-columns: 1fr; }
+  .page { padding: 76px 16px 48px; }
+  .switch-row { flex-direction: column; align-items: flex-start; }
+}
+
+/* live nowcast */
+.cn-live { border: 1px solid var(--line-strong); padding: 16px 18px 12px; margin: 22px 0 8px; }
+.cn-live-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.cn-live-head h2 { margin: 0; display: flex; align-items: center; gap: 10px; }
+.cn-pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--faint); display: inline-block; }
+.cn-pulse.on { background: var(--amber); box-shadow: 0 0 0 0 var(--amber); animation: cn-pulse 2s infinite; }
+@keyframes cn-pulse { 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+@media (prefers-reduced-motion: reduce) { .cn-pulse.on { animation: none; } }
+.cn-live-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 10px 0; }
+.cn-live-cell { border: 1px solid var(--line); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.cn-live-cell.alert { border-color: var(--amber); }
+.cn-live-bar { position: relative; display: block; height: 6px; background: var(--line); }
+.cn-live-bar > span { display: block; height: 100%; background: var(--cyan); }
+.cn-live-cell.alert .cn-live-bar > span { background: var(--amber); }
+.cn-live-bar > i { position: absolute; top: -3px; width: 2px; height: 12px; background: var(--text); }
+.cn-live-facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 8px 0; }
+.cn-live-facts div { display: flex; flex-direction: column; }
+.cn-live-facts dt { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; }
+.cn-live-facts dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+/* training-domain map and model page */
+.dm { margin: 8px 0 0; }
+.dm-canvas { width: 100%; border: 1px solid var(--line-strong); }
+.dm-pin { background: var(--bg, #0c1216); border: 1px solid var(--cyan); color: var(--text); padding: 3px 8px; font: inherit; font-size: 12px; cursor: pointer; display: flex; flex-direction: column; text-align: left; line-height: 1.25; }
+.dm-pin b { font-weight: 600; }
+.dm-pin span { color: var(--faint); font-size: 10.5px; }
+.dm-pin.on { border-color: var(--amber); }
+.dm-pin.pending { border-style: dashed; }
+.cn-conf { display: flex; flex-wrap: wrap; gap: 16px; }
+.cn-conf .matrix { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.cn-conf .matrix caption { text-align: left; font-size: 12px; margin-bottom: 4px; }
+.cn-conf .matrix th, .cn-conf .matrix td { border: 1px solid var(--line); padding: 5px 10px; text-align: right; font-weight: 400; }
+.cn-conf .matrix th:first-child { text-align: left; color: var(--faint); }
+.cn-rel { width: 100%; max-width: 340px; }

@@ -1,0 +1,240 @@
+{
+  "model_version": "akash-xgb-0.4.0",
+  "trained_at": "2026-09-30T14:48:50.187105+00:00",
+  "data_mode": "SEVIR",
+  "step_min": 5,
+  "leads_min": [
+    15,
+    30,
+    45,
+    60,
+    90
+  ],
+  "hazards": [
+    "thunderstorm",
+    "lightning"
+  ],
+  "skipped_targets": [],
+  "disclaimer": "SEVIR MODE. Each case is a United States storm patch from the SEVIR dataset, chosen by the Mumbai-analogue catalog. It is not an observation over Mumbai or India. The radar field is vertically integrated liquid in kg/m\u00b2, coarsened to 8 km. The thunderstorm label is VIL at or above 5 kg/m\u00b2, a proxy, not 40 dBZ. Predictions are a research prototype, not warnings.",
+  "feature_names": [
+    "motion_u",
+    "motion_v",
+    "motion_speed",
+    "vil",
+    "vil_trend_1",
+    "vil_trend_2",
+    "vil_grad_mag",
+    "neighbor_vil_max",
+    "upstream_vil_1",
+    "lightning_count",
+    "lightning_density",
+    "lightning_rate_change",
+    "neighbor_lightning"
+  ],
+  "feature_catalog": [
+    {
+      "id": "motion_u",
+      "label": "Storm motion eastward",
+      "unit": "m/s",
+      "group": "motion"
+    },
+    {
+      "id": "motion_v",
+      "label": "Storm motion northward",
+      "unit": "m/s",
+      "group": "motion"
+    },
+    {
+      "id": "motion_speed",
+      "label": "Storm motion speed",
+      "unit": "m/s",
+      "group": "motion"
+    },
+    {
+      "id": "vil",
+      "label": "Vertically integrated liquid",
+      "unit": "kg/m\u00b2",
+      "group": "radar"
+    },
+    {
+      "id": "vil_trend_1",
+      "label": "VIL change (5 min)",
+      "unit": "kg/m\u00b2 / 5 min",
+      "group": "radar"
+    },
+    {
+      "id": "vil_trend_2",
+      "label": "VIL change (10 min)",
+      "unit": "kg/m\u00b2 / 10 min",
+      "group": "radar"
+    },
+    {
+      "id": "vil_grad_mag",
+      "label": "VIL spatial gradient",
+      "unit": "kg/m\u00b2 / km",
+      "group": "radar"
+    },
+    {
+      "id": "neighbor_vil_max",
+      "label": "Neighborhood maximum VIL",
+      "unit": "kg/m\u00b2",
+      "group": "radar"
+    },
+    {
+      "id": "upstream_vil_1",
+      "label": "Upstream VIL (5 min motion)",
+      "unit": "kg/m\u00b2",
+      "group": "motion"
+    },
+    {
+      "id": "lightning_count",
+      "label": "Lightning count",
+      "unit": "flashes / 5 min",
+      "group": "lightning"
+    },
+    {
+      "id": "lightning_density",
+      "label": "Lightning density",
+      "unit": "flashes / km\u00b2 / 5 min",
+      "group": "lightning"
+    },
+    {
+      "id": "lightning_rate_change",
+      "label": "Lightning-rate change",
+      "unit": "flashes / 5 min",
+      "group": "lightning"
+    },
+    {
+      "id": "neighbor_lightning",
+      "label": "Neighborhood lightning count",
+      "unit": "flashes / 5 min",
+      "group": "lightning"
+    }
+  ],
+  "models": {
+    "thunderstorm_15": {
+      "file": "thunderstorm_15.json",
+      "n_trees": 200
+    },
+    "thunderstorm_30": {
+      "file": "thunderstorm_30.json",
+      "n_trees": 200
+    },
+    "thunderstorm_45": {
+      "file": "thunderstorm_45.json",
+      "n_trees": 200
+    },
+    "thunderstorm_60": {
+      "file": "thunderstorm_60.json",
+      "n_trees": 192
+    },
+    "thunderstorm_90": {
+      "file": "thunderstorm_90.json",
+      "n_trees": 80
+    },
+    "lightning_15": {
+      "file": "lightning_15.json",
+      "n_trees": 54
+    },
+    "lightning_30": {
+      "file": "lightning_30.json",
+      "n_trees": 58
+    },
+    "lightning_45": {
+      "file": "lightning_45.json",
+      "n_trees": 40
+    },
+    "lightning_60": {
+      "file": "lightning_60.json",
+      "n_trees": 47
+    },
+    "lightning_90": {
+      "file": "lightning_90.json",
+      "n_trees": 63
+    }
+  },
+  "split": {
+    "scheme": "case-order blocked split",
+    "train_cases": [
+      "20180703T0055Z-S754727",
+      "20180703T2220Z-S754732",
+      "20180703T2340Z-S766450",
+      "20180704T0023Z-S766197",
+      "20180704T0735Z-S774596",
+      "20180704T1925Z-S757387",
+      "20180705T0130Z-S773052",
+      "20180708T2224Z-S771722",
+      "20180712T2258Z-S773166",
+      "20180713T2058Z-S759449",
+      "20180714T1501Z-S766161",
+      "20180715T2045Z-S773397",
+      "20180717T1802Z-S769502",
+      "20180717T2000Z-S773175",
+      "20180718T1610Z-S775665",
+      "20180719T1945Z-S759839",
+      "20180721T0223Z-S758525",
+      "20180721T0240Z-S775686",
+      "20180721T0755Z-S776709",
+      "20180721T2206Z-S776863",
+      "20180722T0052Z-S776861",
+      "20180726T2015Z-S776924",
+      "20180729T1935Z-S762341",
+      "20180730T2030Z-S762093",
+      "20180731T1739Z-S762424",
+      "20180731T2005Z-S761768",
+      "20180801T0315Z-S762358",
+      "20180806T2032Z-S763702"
+    ],
+    "val_cases": [
+      "20180806T2335Z-S766109",
+      "20180808T1600Z-S782100",
+      "20180808T1830Z-S771447",
+      "20180808T2137Z-S766117",
+      "20180811T0107Z-S764450",
+      "20180816T2050Z-S777712",
+      "20180822T2025Z-S769249",
+      "20180829T1700Z-S771044",
+      "20180829T2220Z-S772556"
+    ],
+    "test_cases": [
+      "20180830T2142Z-S782114",
+      "20180902T0123Z-S785385",
+      "20180906T1900Z-S784555",
+      "20180906T2119Z-S775582",
+      "20180906T2243Z-S785351",
+      "20180913T2222Z-S774586",
+      "20180921T2326Z-S785854",
+      "20180926T1716Z-S782192",
+      "20180928T2303Z-S782061"
+    ],
+    "train_rows": 1870848,
+    "val_rows": 601344,
+    "test_rows": 601344,
+    "demo_seeds_excluded": []
+  },
+  "domain": {
+    "name": "SEVIR S754727 (US patch, Mumbai-analogue selection)",
+    "lat_min": 30.74640131660656,
+    "lat_max": 34.08558145860458,
+    "lon_min": -95.14069652024757,
+    "lon_max": -90.76351180843605,
+    "n_lat": 48,
+    "n_lon": 48
+  },
+  "labels": {
+    "thunderstorm": "PROXY: SEVIR vertically integrated liquid at the valid time is at least 5 kg/m\u00b2. This is not a reflectivity threshold and not an observed warning.",
+    "lightning": "Lightning count at the valid time is at least 1.",
+    "status": "Prototype labels. Not an official warning definition."
+  },
+  "source_name": "SEVIR storm patches (Veillette et al., NeurIPS 2020), VIL and lightning, selected by the Mumbai-analogue catalog. US storms, not Mumbai observations.",
+  "risk_thresholds": {
+    "watch": 0.35,
+    "high": 0.6,
+    "severe": 0.8,
+    "status": "prototype"
+  },
+  "baselines": {
+    "persistence": "The analysis-time event is repeated at every lead. It does not move or grow.",
+    "extrapolation": "The analysis-time event mask is advected with motion estimated from the previous reflectivity frame."
+  }
+}

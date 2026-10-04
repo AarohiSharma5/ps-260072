@@ -1,0 +1,5 @@
+{
+"user_credentials": { "username/email": "YOUR_MOSDAC_USERNAME", "password": "YOUR_PASSWORD" },
+"search_parameters": { "datasetId": "3SIMG_L2B_CTP", "startTime": "2025-10-15", "endTime": "2025-10-15", "count": "", "boundingBox": "79.5,12.5,81.0,13.8", "gId": "" },
+"download_settings": { "download_path": "../../data/mosdac_raw", "organize_by_date": true, "skip_user_input": false, "generate_error_logs": true, "error_logs_dir": "" }
+}
